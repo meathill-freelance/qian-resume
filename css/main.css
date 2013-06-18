@@ -109,7 +109,7 @@ html, body, #carousel, #carousel div {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  background-color: silver;
+  background-color: #FFF;
 }
 #carousel h2 {
   color: #fff;

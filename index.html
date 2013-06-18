@@ -85,7 +85,7 @@
 <link rel="stylesheet" href="css/normalize.css" />
 <link rel="stylesheet" href="css/main.css" />
 <script src="js/define.js"></script>
-<script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="js/vendor/jquery-2.0.2.min.js"></script>
 <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 <script src="js/vendor/jquery.hammer.min.js"></script>
 <script src="js/helper.js"></script>
@@ -122,7 +122,6 @@
   queue.addEventListener('fileload', fileLoadHandler);
   if (!DEBUG) { // replace
     queue.loadFile('css/style.css');
-    queue.loadFile('//code.jquery.com/jquery-2.0.0.min.js');
     queue.loadFile('js/libs.js');
     queue.loadFile('js/app.min.js');
   } // replace

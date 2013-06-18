@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         separator: ';'
       },
       libs: {
-        src: ['js/vendor/modernizr-2.6.2.min.js', 'js/vendor/jquery.hammer.min.js'],
+        src: ['js/vendor/jquery-2.0.2.min.js', 'js/vendor/modernizr-2.6.2.min.js', 'js/vendor/jquery.hammer.min.js'],
         dest: 'resume/js/libs.js'
       },
       apps: {
