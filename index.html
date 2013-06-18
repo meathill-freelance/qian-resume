@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>钱小磊简历</title>
+<meta name="description" content="你好，我是钱小磊，你可以叫我钱老板。">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cleartype" content="on">
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+      href="img/touch/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+      href="img/touch/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+<link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+<meta name="msapplication-TileColor" content="#222222">
+
+
+<!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+<!--
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="">
+-->
+
+<!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+<!--
+<script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+-->
+
+<style>
+  body {
+    background: #000;
+    padding: 0;
+    margin: 0;
+  }
+  #loading {
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -80px;
+    -webkit-animation-name: loading;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;
+  }
+  #loading p {
+    text-align: center;
+    color: #FFF;
+    font: 16px/20px Helvetica;
+    margin: 0;
+  }
+  #loading img {
+    margin-bottom: 8px;
+    display: block;
+  }
+  @-webkit-keyframes loading{
+    0% { opacity: 1 }
+    50% { opacity: 0.2 }
+    100% { opacity: 1 }
+  }
+  .hide {
+    display: none;
+  }
+</style>
+
+<div id="loading">
+  <p><img src="img/face.png" width="144" height="144" /></p>
+  <p>你好，我是钱小磊</p>
+</div>
+
+
+<div id="carousel" class="hide">
+
+</div>
+
+<script src="js/vendor/preloadjs-0.3.1.min.js"></script>
+<script>
+  // load resource
+  function fileLoadHandler(event) {
+    var item = event.item,
+        type = item.type;
+
+    switch (type) {
+      case createjs.LoadQueue.CSS:
+      case createjs.LoadQueue.JAVASCRIPT:
+        document.head.appendChild(event.result);
+        break;
+
+      case createjs.LoadQueue.IMAGE:
+        var div = document.createElement('div');
+        div.appendChild(event.result);
+        document.getElementById('carousel').appendChild(div);
+        break;
+    }
+  }
+  function completeHandler(event) {
+    init();
+  }
+  var queue = new createjs.LoadQueue();
+  queue.addEventListener('complete', completeHandler);
+  queue.addEventListener('fileload', fileLoadHandler);
+  queue.loadFile('css/normalize.css');
+  queue.loadFile('css/main.css?2');
+  queue.loadFile('js/vendor/modernizr-2.6.2.min.js');
+  queue.loadFile('//code.jquery.com/jquery-2.0.0.min.js');
+  queue.loadFile('js/vendor/jquery.hammer.min.js');
+  queue.loadFile('js/helper.js');
+  queue.loadFile('js/Carousel.js');
+  queue.loadFile('js/main.js?2');
+  for (var i = 1, len = 9; i < len; i++) {
+    queue.loadFile({
+      id: i,
+      src: 'img/' + i + '.jpg'
+    })
+  }
+</script>
