@@ -1,0 +1,25 @@
+{
+  "name": "Resume",
+  "description": "A responsive web resume, write in HTML5",
+  "version": "0.1.0",
+  "url": "http://roudemos.sinaapp.com/resume/",
+  "keywords": [
+    "resume",
+    "HTML5",
+    "responsive",
+    "mobile"
+  ],
+  "author": "Meathill <meathill@gmail.com> (http://blog.meathill.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "hammerjs": ">=1.0.5"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-text-replace": "~0.3.1"
+  }
+}

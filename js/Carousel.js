@@ -9,23 +9,13 @@ function Carousel(element) {
   var panes = element.children(),
       paneHeight = element.height(),
       pane_count = panes.length,
-      current_pane = 0;
-
-  /**
-   * show pane by index
-   * @param   {Number}    index
-   */
-  this.showPane = function( index ) {
-    // between the bounds
-    index = Math.max(0, Math.min(index, pane_count - 1));
-    current_pane = index;
-
-    var offset = -((100 / pane_count) * current_pane);
-    setContainerOffset(panes.eq(index), offset, true);
-  };
-
+      current_pane = 0,
+      target;
 
   function setContainerOffset(target, percent, animate) {
+    if (!target) {
+      return;
+    }
     target.removeClass("animate");
 
     if (animate) {
@@ -38,35 +28,54 @@ function Carousel(element) {
       target.css("transform", "translate(0, "+ percent +"%)");
     } else {
       var px = ((paneHeight * pane_count) / 100) * percent;
-      target.css("left", px + "px");
+      target.css("top", px + "px");
     }
   }
 
-  this.next = function() { 
-    return this.showPane(current_pane + 1, true);
+  this.next = function() {
+    if (current_pane === pane_count - 1) {
+      setContainerOffset(element, 0, true);
+      return;
+    }
+    setContainerOffset(panes.eq(current_pane), -100, true);
+    current_pane += 1;
   };
-  this.prev = function() { 
-    return this.showPane(current_pane - 1, true);
+  this.prev = function() {
+    if (current_pane === 0) {
+      setContainerOffset(element, 0, true);
+      return;
+    }
+    setContainerOffset(panes.eq(current_pane - 1), 0, true);
+    current_pane -= 1;
   };
 
   function handleHammer(event) {
     // disable browser scrolling
     event.gesture.preventDefault();
+    var drag_offset = 100 / paneHeight * event.gesture.deltaY;
 
     switch(event.type) {
-      case 'dragup':
-      case 'dragdown':
-        // stick to the finger
-        var pane_offset = -(100 / pane_count) * current_pane;
-        var drag_offset = ((100 / paneHeight) * event.gesture.deltaY) / pane_count;
-
-        // slow down at the first and last pane
-        if ((current_pane == 0 && event.gesture.direction == Hammer.DIRECTION_DOWN) ||
-          (current_pane == pane_count - 1 && event.gesture.direction == Hammer.DIRECTION_UP)) {
+      case 'dragup':// slow down at the first and last pane
+        target = $(event.target).closest('div');
+        if (current_pane === pane_count - 1) {
           drag_offset *= .4;
+          target = element;
+        }
+        setContainerOffset(target, drag_offset);
+        break;
+
+      case 'dragdown':
+        // slow down at the first and last pane
+        target = $(event.target).closest('div');
+        if (current_pane === 0) {
+          drag_offset *= .4;
+          target = element;
+        } else {
+          target = target.prev();
+          drag_offset -= 100;
         }
 
-        setContainerOffset(event.target, drag_offset + pane_offset);
+        setContainerOffset(target, drag_offset);
         break;
 
       case 'swipeup':
@@ -81,15 +90,16 @@ function Carousel(element) {
 
       case 'release':
         // more then 50% moved, navigate
-        if (Math.abs(event.gesture.deltaY) > paneHeight/2) {
-          if(event.gesture.direction == Hammer.DIRECTION_DOWN) {
+        if (Math.abs(event.gesture.deltaY) > paneHeight / 3) {
+          if(event.gesture.direction === Hammer.DIRECTION_DOWN) {
             self.prev();
           } else {
             self.next();
           }
         } else {
-          self.showPane(current_pane, true);
+          setContainerOffset(target, 0);
         }
+        target = null;
         break;
     }
   }

@@ -3,7 +3,14 @@ function init() {
 
   // remove loading
   $('#loading').remove();
-  $('#carousel').removeClass('hide');
+  $('#carousel')
+    .removeClass('hide')
+    .addClass('animated bounceInDown');
+  $('body').css('background', 'silver');
+
+  setTimeout(function () {
+    $('#carousel').removeClass('animated bounceInDown');
+  }, 1000);
 
   // ga
   (function (i, s, o, g, r, a, m) {

@@ -8,15 +8,15 @@
 <meta http-equiv="cleartype" content="on">
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
-      href="img/touch/apple-touch-icon-144x144-precomposed.png">
+      href="img/touch/apple-touch-icon-144x144-precomposed.jpg">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
-      href="img/touch/apple-touch-icon-114x114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
-<link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+      href="img/touch/apple-touch-icon-114x114-precomposed.jpg">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.jpg">
+<link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.jpg">
+<link rel="shortcut icon" href="img/touch/apple-touch-icon.jpg">
 
 <!-- Tile icon for Win8 (144x144 + tile color) -->
-<meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+<meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.jpg">
 <meta name="msapplication-TileColor" content="#222222">
 
 
@@ -72,7 +72,7 @@
 </style>
 
 <div id="loading">
-  <p><img src="img/face.png" width="144" height="144" /></p>
+  <p><img src="img/face.jpg" width="144" height="144" /></p>
   <p>你好，我是钱小磊</p>
 </div>
 
@@ -80,6 +80,18 @@
 <div id="carousel" class="hide">
 
 </div>
+
+<!-- replace start -->
+<link rel="stylesheet" href="css/normalize.css" />
+<link rel="stylesheet" href="css/main.css" />
+<script src="js/define.js"></script>
+<script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<script src="js/vendor/jquery.hammer.min.js"></script>
+<script src="js/helper.js"></script>
+<script src="js/Carousel.js"></script>
+<script src="js/main.js"></script>
+<!-- replace over -->
 
 <script src="js/vendor/preloadjs-0.3.1.min.js"></script>
 <script>
@@ -96,25 +108,24 @@
 
       case createjs.LoadQueue.IMAGE:
         var div = document.createElement('div');
-        div.appendChild(event.result);
+        div.style.zIndex = 10 - item.id;
+        div.style.backgroundImage = 'url(' + event.result.src + ')';
         document.getElementById('carousel').appendChild(div);
         break;
     }
   }
-  function completeHandler(event) {
+  function completeHandler() {
     init();
   }
   var queue = new createjs.LoadQueue();
   queue.addEventListener('complete', completeHandler);
   queue.addEventListener('fileload', fileLoadHandler);
-  queue.loadFile('css/normalize.css');
-  queue.loadFile('css/main.css?2');
-  queue.loadFile('js/vendor/modernizr-2.6.2.min.js');
-  queue.loadFile('//code.jquery.com/jquery-2.0.0.min.js');
-  queue.loadFile('js/vendor/jquery.hammer.min.js');
-  queue.loadFile('js/helper.js');
-  queue.loadFile('js/Carousel.js');
-  queue.loadFile('js/main.js?2');
+  if (!DEBUG) { // replace
+    queue.loadFile('css/style.css');
+    queue.loadFile('//code.jquery.com/jquery-2.0.0.min.js');
+    queue.loadFile('js/libs.js');
+    queue.loadFile('js/app.min.js');
+  } // replace
   for (var i = 1, len = 9; i < len; i++) {
     queue.loadFile({
       id: i,

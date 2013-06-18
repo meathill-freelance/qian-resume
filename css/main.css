@@ -72,18 +72,17 @@ html, body, #carousel, #carousel div {
   position: relative;
 }
 #carousel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
   overflow: hidden;
-  background: silver;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0,0,0) scale3d(1,1,1);
   -webkit-transform-style: preserve-3d;
 }
-#carousel .animate {
+#carousel,
+#carousel div {
+  box-shadow: 0 0 10px #CCC;
+}
+#carousel div.animate {
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
   -o-transition: all .3s;
@@ -98,16 +97,21 @@ html, body, #carousel, #carousel div {
   overflow: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   box-pack: center;
   -webkit-box-pack: center;
   display: box;
   display: -webkit-box;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: silver;
 }
-#carousel img {
-  height: 100%;
-}
-#carousel li h2 {
+#carousel h2 {
   color: #fff;
   font-size: 30px;
   text-align: center;
@@ -118,8 +122,62 @@ html, body, #carousel, #carousel div {
   text-shadow: -1px -1px 0 rgba(0,0,0,.2);
 }
 
+body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
+  -webkit-backface-visibility: hidden;
+}
+.animated {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+  }
 
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+  }
 
+  80% {
+    -webkit-transform: translateY(-10px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+  }
+}
+@keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-2000px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+
+  80% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bounceInDown {
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
 
 
 
