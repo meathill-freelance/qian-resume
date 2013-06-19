@@ -73,7 +73,7 @@
 
 <div id="loading">
   <p><img src="img/face.jpg" width="144" height="144" /></p>
-  <p>你好，我是钱小磊</p>
+  <p id="progress">0%</p>
 </div>
 
 
@@ -90,6 +90,7 @@
 <script src="js/vendor/jquery.hammer.min.js"></script>
 <script src="js/helper.js"></script>
 <script src="js/Carousel.js"></script>
+<script src="js/link.js"></script>
 <script src="js/main.js"></script>
 <!-- replace over -->
 
@@ -114,12 +115,16 @@
         break;
     }
   }
+  function fileProgressHandler(event) {
+    document.getElementById('progress').innerHTML = (event.progress * 100 >> 0) + '%';
+  }
   function completeHandler() {
     init();
   }
   var queue = new createjs.LoadQueue();
   queue.addEventListener('complete', completeHandler);
   queue.addEventListener('fileload', fileLoadHandler);
+  queue.addEventListener('fileprogress', fileProgressHandler);
   if (!DEBUG) { // replace
     queue.loadFile('css/style.css');
     queue.loadFile('js/libs.js');

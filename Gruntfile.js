@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         dest: 'resume/js/libs.js'
       },
       apps: {
-        src: ['js/helper.js', 'js/Carousel.js', 'js/main.js'],
+        src: ['js/helper.js', 'js/Carousel.js', 'js/link.js', 'js/main.js'],
         dest: 'resume/js/app.js'
       }
     },

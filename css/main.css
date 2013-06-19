@@ -84,8 +84,6 @@ html, body, #carousel, #carousel div {
 }
 #carousel div.animate {
   -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -o-transition: all .3s;
   transition: all .3s;
 }
 #carousel div {
@@ -127,12 +125,8 @@ body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
 }
 .animated {
   -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 @-webkit-keyframes bounceInDown {

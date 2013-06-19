@@ -5,7 +5,10 @@ function init() {
   $('#loading').remove();
   $('#carousel')
     .removeClass('hide')
-    .addClass('animated bounceInDown');
+    .addClass('animated bounceInDown')
+    .on('animationend', function () {
+      console.log('xxx');
+    });
   $('body').css('background', 'silver');
 
   setTimeout(function () {
